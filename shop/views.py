@@ -16,7 +16,7 @@ def product_list(request, category_slug=None):
                   {'category': category,
                    'categories': categories,
                    'products': products})
-
+    paginate_by = 4
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product,
