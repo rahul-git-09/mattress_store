@@ -2,32 +2,174 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>{% block title %}My shop{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static "js/jquery.min.js" %}"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Mattress Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'><!--//fonts-->
+<!-- start menu -->
+<link href="{% static "css/memenu.css" %}" rel="stylesheet" type="text/css" media="all" />
+
+<link href="{% static "css/pdf.css" %}" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="{% static "js/memenu.js" %}"></script>
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>
+<script src="{% static "js/simpleCart.min.js" %}"> </script>
+    <title>{% block title %}Mattress A Ecommerce{% endblock %}</title>
+
   </head>
   <body>
-    <div id="header">
-      <a href="/" class="logo">My shop</a>
-    </div>
-    <div id="subheader">
-      <div class="cart">
-        {% with total_items=cart|length %}
-          {% if total_items > 0 %}
-            Your cart:
-            <a href="{% url "cart:cart_detail" %}">
-              {{ total_items }} item{{ total_items|pluralize }},
-              ${{ cart.get_total_price }}
-            </a>
-          {% else %}
-            Your cart is empty.
-          {% endif %}
-        {% endwith %}
-      </div>
-    </div>
-    <div id="content">
-      {% block content %}
-      {% endblock %}
-    </div>
-  </body>
+<!--header-->
+	<div class="header">
+		<div class="header-top">
+			<div class="container">
+				<div class="social">
+					<ul>
+						<li><a href="#"><i class="facebok"> </i></a></li>
+						<li><a href="#"><i class="twiter"> </i></a></li>
+						<li><a href="#"><i class="inst"> </i></a></li>
+						<li><a href="#"><i class="goog"> </i></a></li>
+							<div class="clearfix"></div>	
+					</ul>
+				</div>
+				<div class="header-left">
+				
+					<div class="search-box">
+						<div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Enter your search term..." type="search"  id="search">
+								<input class="sb-search-submit" type="submit" value="">
+								<span class="sb-icon-search"> </span>
+							</form>
+						</div>
+					</div>
+				
+	<!-- search-scripts -->
+						<script src="{% static "js/classie.js" %}"></script>
+						<script src="{% static "js/uisearch.js" %}"></script>
+							<script>
+								new UISearch( document.getElementById( 'sb-search' ) );
+							</script>
+						<!-- //search-scripts -->
+
+					<div class="ca-r">
+						<div class="cart box_1">
+							<div class="cart">
+								{% with total_items=cart|length %}
+								{% if total_items > 0 %}
+									<h3> <div class="total">
+										<a href="{% url "cart:cart_detail" %}">
+											{{ total_items }} item{{ total_items|pluralize }},
+											{{ cart.get_total_price }}
+										</a> </div>
+										<img src="{% static "images/cart.png" %}" alt=""/></h3>
+									
+								{% else %}
+									<h3><img src="{% static "images/cart.png" %}" alt=""/>empty.</h3> 
+								{% endif %}
+								{% endwith %}
+							</div>
+						</div>
+					</div>
+						<div class="clearfix"> </div>
+				</div>
+					
+			</div>
+			</div>
+			<div class="container">
+				<div class="head-top">
+					<div class="logo">
+						<h1><a href="/">Mattress</a></h1>
+					</div>
+			<div class=" h_menu4">
+				<ul class="memenu skyblue">
+					<li {% if not category %}class="selected"{% endif %}>
+					<a class="color8" href="{% url "shop:product_list" %}">All Products</a>
+					</li>
+					{% for c in categories %}
+					<li {% if category.slug == c.slug %}class="selected"{% endif %}>
+						<a class="color8" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+				</div>
+					
+					<div class="clearfix"> </div>
+			</div>
+			</div>
+	</div>
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+
+	<div class="footer">
+				<div class="container">
+			<div class="footer-top-at">
+			
+				<div class="col-md-3 amet-sed">
+				<h4>MORE INFO</h4>
+				<ul class="nav-bottom">
+						<li><a href="#">How to order</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="contact.html">Location</a></li>
+						<li><a href="#">Shipping</a></li>
+						<li><a href="#">Membership</a></li>	
+					</ul>	
+				</div>
+				<div class="col-md-3 amet-sed">
+					<h4>CATEGORIES</h4>
+					<ul class="nav-bottom">
+						{% for c in categories %}
+						<li>
+							<a class="color8" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+						</li>
+						{% endfor %}
+					</ul>
+					
+				</div>
+				<div class="col-md-3 amet-sed">
+					<h4>NEWSLETTER</h4>
+					<div class="stay">
+						<div class="stay-left">
+							<form>
+								<input type="text" placeholder="Enter your email " required="">
+							</form>
+						</div>
+						<div class="btn-1">
+							<form>
+								<input type="submit" value="Subscribe">
+							</form>
+						</div>
+							<div class="clearfix"> </div>
+			</div>
+					
+				</div>
+				<div class="col-md-3 amet-sed ">
+				<h4>CONTACT US</h4>
+					<p>80 feet road, Mata ka Than</p>
+					<p>Magra Punjala Mandore</p>
+					<p>Jodhpur Rajasthan India </p>
+					<p>office :  +91 8107272599</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="footer-class">
+		<p>© 2015 Mattress . All Rights Reserved | Design by  <a href="#" target="_blank">Gtech layouts</a> </p>
+		</div>
+	</div>
+</body>
 </html>

@@ -6,30 +6,102 @@
 {% endblock %}
 
 {% block content %}
-  <div id="sidebar">
-    <h3>Categories</h3>
-    <ul>
-      <li {% if not category %}class="selected"{% endif %}>
-        <a href="{% url "shop:product_list" %}">All</a>
+<div class="banner">
+  <div class="container">
+      <script src="{% static "js/responsiveslides.min.js" %}"></script>
+  <script>
+    $(function () {
+      $("#slider").responsiveSlides({
+      auto: true,
+      nav: true,
+      speed: 500,
+      namespace: "callbacks",
+      pager: true,
+      });
+    });
+  </script>
+    <div  id="top" class="callbacks_container">
+    <ul class="rslides" id="slider">
+        <li>
+        
+          <div class="banner-text">
+            <h3>Lorem Ipsum is   </h3>
+          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+          
+          </div>
+      
       </li>
-      {% for c in categories %}
-        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-        </li>
-      {% endfor %}
+      <li>
+        
+          <div class="banner-text">
+            <h3>There are many  </h3>
+          <p>Popular belief Contrary to , Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                      
+
+          </div>
+        
+      </li>
+      <li>
+          <div class="banner-text">
+            <h3>Sed ut perspiciatis</h3>
+          <p>Lorem Ipsum is not simply random text. Contrary to popular belief, It has roots in a piece of classical Latin literature from 45 BC.</p>
+              
+
+          </div>
+        
+      </li>
     </ul>
   </div>
-  <div id="main" class="product-list">
-    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-    {% for product in products %}
-      <div class="item">
-        <a href="{{ product.get_absolute_url }}">
-          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-        </a>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-        <br>
-        ${{ product.price }}
+
+</div>
+</div>
+  
+<!-- grow -->
+  <div class="pro-du">
+    <div class="container">
+      <div class="col-md-12 product1">
+          {% for product in products %}
+          
+              <div class="col-md-6 bottom-cd simpleCart_shelfItem">
+                  <div class="product-at ">
+                      <a href="{{ product.get_absolute_url }}"><img class="img-responsive" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}" alt="">
+                      <div class="pro-grid">
+                                  <span class="buy-in">Buy Now</span>
+                      </div>
+                  </a>	
+                  </div>
+                  <p class="tun"><span></span><br><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
+                  <div class="ca-rt">
+                      <a href="{{ product.get_absolute_url }}" class="item_add"><p class="number item_price"><i> </i>{{ product.price }}</p></a>						
+                  </div>
+                  
+                </div>
+          
+          {% endfor %}
       </div>
-    {% endfor %}
+     <!--- <div class="col-md-3 prod-rgt">
+          <h3>Categories</h3>
+          {% for c in categories %}
+          <div class=" pro-tp">
+              <div class="pl-lft">
+                  <a href="{{ c.get_absolute_url }}"><img class="img-responsive" src="{% static "images/l2.jpg" %}" alt=""></a>
+              </div>
+              <div class="pl-rgt">
+                  <h6><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></h6>
+              </div>
+                  <div class="clearfix"></div>
+          {% endfor %}
+            </div>
+          <div class="pr-btm">
+          <h4>What Our Client Say</h4>
+              <img class="img-responsive" src="{% static "images/pi.jpg" %}" alt="">
+              <h6>John</h6>
+              <p>Lorem Ipsum is simply dummy text of the printing industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+          </div>
+      
+      <div class="clearfix"></div>
+      </div> -->
+    </div>
   </div>
+<!-- products -->
 {% endblock %}
